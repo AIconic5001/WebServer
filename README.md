@@ -13,3 +13,5 @@ Backend:
 - SQL
 - Python: Flask, Jinja
 
+Frontend Notes:
+The website is deployed from the branch `kalliopeWeb`. Any new updates should be merged into that branch after being reviewed for new deployments
