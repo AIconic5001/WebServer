@@ -3,13 +3,15 @@
 This is for web server development: backend and frontend
 
 Planned Tech Stacks:
-Frontend: 
+Frontend:
+
 - HTML, CSS
 - React
 - jQuery
 - Redux
 
-Backend: 
+Backend:
+
 - SQL
 - Python: Flask, Jinja
 
@@ -17,3 +19,7 @@ Frontend Notes:
 The website is deployed from the branch `kalliopeWeb`. Any new updates should be merged into that branch after being reviewed for new deployments
 
 ### **!IMPORTANT:** Do NOT merge PR from branch `kalliopeWeb` into `main`.
+
+## Local Host Back end:
+
+- Run this command on Powershell for Windows: `flask --app server.py --debug run`
