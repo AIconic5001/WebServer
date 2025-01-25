@@ -12,15 +12,8 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create the folder if it doesn't exi
 # Define a route
 @app.route('/')
 def hello_world():
-    return '<h1>Hello, World!</h1>'
+    return render_template('index.html')
 
-@app.route('/user/<username>')
-def user(username):
-    return '<h1>Hello {}</h1>!!!'.format(username)
-
-@app.route('/about')
-def about():
-    return '<h1>This is about page! some changes are made</h1>'
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -32,7 +25,7 @@ def upload():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
             return f'File saved to {filepath}'
-    return render_template('index.html')
+    return render_template('upload.html')
 
 
 @app.route('/save', methods=['POST'])
