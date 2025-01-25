@@ -1,7 +1,13 @@
 from flask import Flask, render_template
 from flask import request
+import os
 # Create a new Flask instance
 app = Flask(__name__)
+
+# Define the folder where uploaded files will be saved
+UPLOAD_FOLDER = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Create the folder if it doesn't exist
 
 # Define a route
 @app.route('/')
@@ -21,10 +27,11 @@ def about():
 def upload():
     if request.method == 'POST':
         file = request.files['file']
-        print(file)
         if file:
-            file.save(f"/save/{file.filename}")
-            return '<h1>File uploaded successfully</h1>'
+            filename = file.filename
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(filepath)
+            return f'File saved to {filepath}'
     return render_template('index.html')
 
 
