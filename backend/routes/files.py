@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory, Blueprint, request, current_app
-from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
-from routes.api import api as api_blueprint
 
 
 # Create a blueprint for auth routes
@@ -15,7 +13,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'docx'}
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # get all files
-@localFiles.route('/', methods=['GET'])
+@localFiles.route('/files', methods=['GET'])
 def list_files():
     files = []
     for filename in os.listdir(UPLOAD_FOLDER):

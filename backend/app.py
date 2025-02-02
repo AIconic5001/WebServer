@@ -1,10 +1,9 @@
 import os
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
-from routes.test import test as test_blueprint
+# from werkzeug.utils import secure_filename
 from routes.files import localFiles as files_blueprint
-
+from routes.test import test as test_blueprint
 # Create Flask app
 app = Flask(__name__, static_folder='static')
 
@@ -15,17 +14,9 @@ CORS(app, resources={r"/api/*": {"origins": "*", "methods": ["GET", "POST", "PUT
 # # Set the upload folder
 # UPLOAD_FOLDER = 'uploads'
 # ALLOWED_EXTENSIONS = {'pdf', 'docx'}
-
-
 # app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 app.register_blueprint(test_blueprint, url_prefix='/api/test')
 app.register_blueprint(files_blueprint, url_prefix='/api/files')
-
-
-
-
-
 
 # @app.route('/')
 # def home():

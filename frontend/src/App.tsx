@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import "./App.css";
+import "./App.scss";
 import {
   QueryClient,
   QueryClientProvider,
@@ -10,6 +10,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
+import UploadFeature from "./pages/Landing/UploadFeature";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +34,19 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <h1> Testing </h1>
+      <header>
+        <ul className="nav">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about">Demo 1</a>
+          </li>
+          <li>
+            <a href="/about">Demo 2</a>
+          </li>
+        </ul>
+      </header>
       <h2> Testing GET </h2>
       <Testing />
       <div className="card">
@@ -42,11 +55,7 @@ function App() {
       </div>
 
       <h3>Upload a document TEST</h3>
-      <Upload />
-
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <UploadFeature />
     </QueryClientProvider>
   );
 }
@@ -71,30 +80,6 @@ function Testing() {
       <h2>Testing something here</h2>
       <p>{data.test}</p>
     </div>
-  );
-}
-
-function Upload() {
-  const queryClient = useQueryClient();
-
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    console.log(formData.get("file"));
-    const testUpload = async () =>
-      await axios.post("/api/files/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-    testUpload();
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" name="file" />
-      <button type="submit">Upload</button>
-    </form>
   );
 }
 
