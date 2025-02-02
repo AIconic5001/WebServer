@@ -33,26 +33,20 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1> Testing </h1>
+      <h2> Testing GET </h2>
+      <Testing />
       <div className="card">
-        <p>Hit the button to see the changes in backend</p>
+        <p>Hit the button to see the changes in backend TESTING POST</p>
         <button onClick={handleClicked}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
+
+      <h3>Upload a document TEST</h3>
+      <Upload />
+
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <Testing />
     </QueryClientProvider>
   );
 }
@@ -78,4 +72,32 @@ function Testing() {
       <p>{data.test}</p>
     </div>
   );
+}
+
+function Upload() {
+  const queryClient = useQueryClient();
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    console.log(formData.get("file"));
+    const testUpload = async () =>
+      await axios.post("/api/files/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    testUpload();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="file" name="file" />
+      <button type="submit">Upload</button>
+    </form>
+  );
+}
+
+function getFiles() {
+  return axios.get("/api/files");
 }

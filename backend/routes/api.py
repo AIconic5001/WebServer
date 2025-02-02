@@ -3,9 +3,6 @@ from flask import request
 
 api = Blueprint('hello', __name__)
 
-@api.route('/hello')
-def hello():
-    return jsonify({'message': 'Hello from Flask!'})
 
 @api.route('/data')
 def get_data():
