@@ -14,13 +14,21 @@ import UploadFeature from "./pages/Landing/UploadFeature";
 
 const queryClient = new QueryClient();
 
+//  API configuration
+const API_CONFIG = {
+  TEST: "/api/test",
+  FILES: "/api/files",
+  UPLOAD: "/api/upload",
+};
+
 const postTesting = async (data: string) => {
-  const response = await axios.post("/api/test", { test: data });
+  const response = await axios.post(API_CONFIG.TEST, { test: data });
   return response;
 };
 
 function App() {
   const [count, setCount] = useState(0);
+  
   useEffect(() => {
     console.log("count changed", count);
   }, [count]);
@@ -28,7 +36,9 @@ function App() {
   const handleClicked = () => {
     setCount((count) => count + 1);
     const testPost = async () =>
-      await axios.post("/api/test", { testPost: `testing ${count} POST OK` });
+      await axios.post(API_CONFIG.TEST, { 
+        testPost: `testing ${count} POST OK` 
+      });
     testPost();
   };
 
@@ -36,19 +46,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <header>
         <ul className="nav">
-          <li>
-            <a href="/">Home</a>
-          </li>
-          <li>
-            <a href="/about">Demo 1</a>
-          </li>
-          <li>
-            <a href="/about">Demo 2</a>
-          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">Demo 1</a></li>
+          <li><a href="/about">Demo 2</a></li>
         </ul>
       </header>
-      <h2> Testing GET </h2>
+      
+      <h2>Testing GET</h2>
       <Testing />
+      
       <div className="card">
         <p>Hit the button to see the changes in backend TESTING POST</p>
         <button onClick={handleClicked}>count is {count}</button>
@@ -64,25 +70,37 @@ export default App;
 
 function Testing() {
   const { isPending, error, data, isFetching } = useQuery({
-    queryKey: [""],
+    queryKey: ['testData'],
     queryFn: async () => {
-      const response = await axios.get("/api/test");
-      return await response.data;
+      const response = await axios.get(API_CONFIG.TEST);
+      return response.data;
     },
+    retry: 2, // Add retry logic
+    refetchOnWindowFocus: false,
   });
 
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) return <div className="status">Loading...</div>;
+  if (error) return (
+    <div className="error">
+      Error: {(error as any).message || "Failed to fetch data"}
+    </div>
+  );
 
   return (
     <div>
-      <h2>Testing something here</h2>
-      <p>{data.test}</p>
+      <h2>Backend Connection Test</h2>
+      <p>GET Response: {data?.test || "No data received"}</p>
+      {isFetching && <small>Updating...</small>}
     </div>
   );
 }
 
+// Enhanced files function with error handling
 function getFiles() {
-  return axios.get("/api/files");
+  return axios.get(API_CONFIG.FILES)
+    .then(response => response.data)
+    .catch(error => {
+      console.error("Error fetching files:", error);
+      throw error;
+    });
 }
