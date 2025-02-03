@@ -9,6 +9,7 @@ import HeroSection from "./pages/Landing/HeroSection";
 import FeatureSection from "./pages/Landing/Features";
 import PromptingFeat from "./pages/Landing/PromptingFeat";
 import Footer from "./components/Footer";
+import { Divider } from "@mui/material";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,8 +25,11 @@ function App() {
     <Suspense fallback={<LoadingSuspense />}>
       <Navbar />
       <HeroSection />
+      <Divider />
       <FeatureSection />
+      <Divider />
       <UploadFeature />
+      <Divider />
       <PromptingFeat />
       <Footer />
     </Suspense>
