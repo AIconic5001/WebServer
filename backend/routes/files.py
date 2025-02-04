@@ -5,19 +5,19 @@ import os
 import logging
 from werkzeug.exceptions import RequestEntityTooLarge
 
-
 # Create a blueprint for auth routes
 localFiles = Blueprint('files', __name__, static_folder='uploads')
 
-
+# Set the upload folder
+# UPLOAD_FOLDER = 'uploads'
+# ALLOWED_EXTENSIONS = {'pdf', 'docx'}
 # Configuration
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'uploads')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 MAX_FILE_SIZE = 16 * 1024 * 1024  # 16MB
 
 # Ensure the upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -39,7 +39,6 @@ def handle_file_too_large(error):
         "error": f"File size exceeds {MAX_FILE_SIZE//(1024*1024)}MB limit"
     }), 413
 
-
 @localFiles.route('/upload', methods=['POST'])
 def upload_file():
     """Handle file uploads"""
@@ -60,7 +59,6 @@ def upload_file():
 
         filename = secure_filename(file.filename)
         save_path = os.path.join(UPLOAD_FOLDER, filename)
-        
         logger.info(f"Saving file: {filename}")
         file.save(save_path)
         logger.info(f"File saved successfully: {save_path}")

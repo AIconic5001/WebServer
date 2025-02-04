@@ -10,7 +10,6 @@ import FeatureSection from "./pages/Landing/Features";
 import PromptingFeat from "./pages/Landing/PromptingFeat";
 import Footer from "./components/Footer";
 import { Divider } from "@mui/material";
-import Upload from "./UploadFeature";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,7 +21,6 @@ function App() {
       <Divider />
       <FeatureSection />
       <Divider />
-      <Upload />
       <UploadFeature />
       <Divider />
       <PromptingFeat />
