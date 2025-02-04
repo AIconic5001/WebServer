@@ -10,16 +10,10 @@ import FeatureSection from "./pages/Landing/Features";
 import PromptingFeat from "./pages/Landing/PromptingFeat";
 import Footer from "./components/Footer";
 import { Divider } from "@mui/material";
+import Upload from "./UploadFeature";
 
 function App() {
   const [count, setCount] = useState(0);
-
-  const handleClicked = () => {
-    setCount((count) => count + 1);
-    const testPost = async () =>
-      await axios.post("/api/test", { testPost: `testing ${count} POST OK` });
-    testPost();
-  };
 
   return (
     <Suspense fallback={<LoadingSuspense />}>
@@ -28,6 +22,7 @@ function App() {
       <Divider />
       <FeatureSection />
       <Divider />
+      <Upload />
       <UploadFeature />
       <Divider />
       <PromptingFeat />
@@ -64,3 +59,39 @@ export default App;
 <button onClick={handleClicked}>count is {count}</button>
 </div> */
 }
+// function Testing() {
+//   const { isPending, error, data, isFetching } = useQuery({
+//     queryKey: ['testData'],
+//     queryFn: async () => {
+//       const response = await axios.get(API_CONFIG.TEST);
+//       return response.data;
+//     },
+//     retry: 2, // Add retry logic
+//     refetchOnWindowFocus: false,
+//   });
+
+//   if (isPending) return <div className="status">Loading...</div>;
+//   if (error) return (
+//     <div className="error">
+//       Error: {(error as any).message || "Failed to fetch data"}
+//     </div>
+//   );
+
+//   return (
+//     <div>
+//       <h2>Backend Connection Test</h2>
+//       <p>GET Response: {data?.test || "No data received"}</p>
+//       {isFetching && <small>Updating...</small>}
+//     </div>
+//   );
+// }
+
+// // Enhanced files function with error handling
+// function getFiles() {
+//   return axios.get(API_CONFIG.FILES)
+//     .then(response => response.data)
+//     .catch(error => {
+//       console.error("Error fetching files:", error);
+//       throw error;
+//     });
+// }
