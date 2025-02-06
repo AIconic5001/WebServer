@@ -12,22 +12,15 @@ import Footer from "./components/Footer";
 import { Divider } from "@mui/material";
 import TestingComponent from "./components/TestingPart";
 import { FiveG } from "@mui/icons-material";
+import { RouterProvider } from "react-router";
+import { routes } from "./config/routes";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <Suspense fallback={<LoadingSuspense />}>
-      <Navbar />
-      <HeroSection />
-      <Divider />
-      <FeatureSection />
-      <Divider />
-      <UploadFeature />
-      <Divider />
-      <PromptingFeat />
-      <Footer />
-      <Testing />
+      <RouterProvider router={routes} />
     </Suspense>
   );
 }
