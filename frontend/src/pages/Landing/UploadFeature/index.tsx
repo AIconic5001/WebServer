@@ -8,6 +8,8 @@ import Grid from "@mui/material/Grid2";
 import { Typography } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { ALLOWED_TYPES, API_CONFIG } from "../../../constants/api.constant";
+import FeatSummaries from "./Components/FeatSummaries";
+import { useGetAllFiles, useUploadFile } from "../handleFilesApi";
 
 UploadFeature.propTypes = {};
 
@@ -16,6 +18,13 @@ function UploadFeature() {
   const queryClient = useQueryClient();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
+
+  const {
+    mutate: uploadFile,
+    isSuccess: uploadSuccess,
+    isPending: pendingUpload,
+    isError: uploadError,
+  } = useUploadFile();
 
   // Improved file validation
   const validateFile = (file: File): boolean => {
@@ -39,31 +48,6 @@ function UploadFeature() {
     return true;
   };
 
-  // Enhanced upload mutation
-  const uploadMutation = useMutation({
-    mutationFn: async (file: File) => {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await axios.post(API_CONFIG.UPLOAD, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      return response.data;
-    },
-    onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [API_CONFIG.FILES] });
-      setSelectedFile(null);
-    },
-    onError: (error: any) => {
-      console.error(
-        "Upload error:",
-        error.response?.data?.error || error.message
-      );
-    },
-  });
-
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && validateFile(file)) {
@@ -73,13 +57,12 @@ function UploadFeature() {
 
   const handleUpload = () => {
     if (selectedFile && validateFile(selectedFile)) {
-      uploadMutation.mutate(selectedFile);
+      uploadFile(selectedFile);
     }
   };
 
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
     // Do something with the files
-    console.log(acceptedFiles);
     const updatedList = [
       ...file,
       ...acceptedFiles.map((f: File) => ({
@@ -90,29 +73,6 @@ function UploadFeature() {
     setFile(updatedList);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
-  // const handleSubmit = (event: any) => {
-  //   // event.preventDefault();
-  //   event.preventDefault();
-  //   const formData = new FormData(event.target);
-  //   // file.forEach((f) => {
-  //   //   formData.append("file", f);
-  //   // });
-  //   // console.log("formData", formData, file);
-
-  //   const testUpload = async () =>
-  //     await axios.post("/api/files/upload", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     });
-
-  //   try {
-  //     testUpload();
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
 
   return (
     <div className="upload-container">
@@ -134,26 +94,23 @@ function UploadFeature() {
 
         <button
           onClick={handleUpload}
-          disabled={!selectedFile || uploadMutation.isPending}
+          disabled={!selectedFile || pendingUpload}
           className="upload-button"
         >
-          {uploadMutation.isPending ? "Uploading..." : "Upload File"}
+          {pendingUpload ? "Uploading..." : "Upload File"}
         </button>
       </form>
 
       {fileError && <p className="error-message">{fileError}</p>}
 
       {/* Upload status */}
-      {uploadMutation.isError && (
-        <p className="error-message">
-          Error:{" "}
-          {uploadMutation.error?.response?.data?.error || "Upload failed"}
-        </p>
+      {uploadError && (
+        <p className="error-message">Error: {uploadError || "Upload failed"}</p>
       )}
 
-      {uploadMutation.isSuccess && (
+      {uploadSuccess && (
         <p className="success-message">
-          File {uploadMutation.data.filename} uploaded successfully!
+          {`File ${selectedFile} uploaded successfully!`}
         </p>
       )}
 
@@ -165,27 +122,9 @@ function UploadFeature() {
         </div>
       )}
 
-      <Grid className="feat-summaries-container" container spacing={3} mt={2}>
-        <Grid size={6}>
-          <Typography>
-            Provide insights into research paper: synopsis, research method,
-            findings, limitations
-          </Typography>
-        </Grid>
-        <Grid size={6}>
-          <Typography>
-            Recommend next-to-read paper based on your paper and related fields
-          </Typography>
-        </Grid>
-        <Grid size={6}>
-          <Typography>Save and share insights of your paper</Typography>
-        </Grid>
-        <Grid size={6}>
-          <Typography>
-            Visualize the timeline and the relevance of the citations
-          </Typography>
-        </Grid>
-      </Grid>
+      <div className="feat-summaries-container">
+        <FeatSummaries />
+      </div>
     </div>
   );
 }

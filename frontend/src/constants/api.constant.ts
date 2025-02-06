@@ -1,7 +1,7 @@
 //  API configuration
 export const API_CONFIG = {
   TEST: "/api/test",
-  FILES: "/api/files",
+  FILES: "/api/files/files",
   UPLOAD: "/api/files/upload",
 };
 
