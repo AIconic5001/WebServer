@@ -110,7 +110,7 @@ function UploadFeature() {
 
       {uploadSuccess && (
         <p className="success-message">
-          {`File ${selectedFile} uploaded successfully!`}
+          {`File ${selectedFile && selectedFile.name} uploaded successfully!`}
         </p>
       )}
 
