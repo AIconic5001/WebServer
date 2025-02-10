@@ -7,7 +7,7 @@ const sizeButton = {
 };
 
 const typography = {
-  fontFamily: ["Inter"].join(","),
+  fontFamily: "var(--sans-font)",
   button1: {
     fontSize: 18,
     fontWeight: 500,
@@ -105,19 +105,22 @@ const components = {
   MuiOutlinedInput: {
     styleOverrides: {
       input: {
-        padding: "10px 16px",
+        padding: "18px 20px",
       },
       root: {
         borderRadius: "6px",
         borderWidth: "1px!important",
-        borderColor: "var(--neutral)",
+        borderColor: "var(--primary-light)",
         "&.Mui-focused": {
           borderWidth: "1px!important",
-          borderColor: "var(--neutral)",
+          borderColor: "var(--primary-light)",
         },
         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
           borderWidth: "1px!important",
-          borderColor: "var(--neutral)",
+          borderColor: "var(--primary-light)",
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: "var(--primary-dark)",
         },
       },
     },
@@ -472,21 +475,12 @@ const theme = createTheme({
       main: "#D9E1E8",
     },
     text: {
-      primary: "#3A3D41",
-      secondary: "#737982",
+      primary: "#4F46E5",
+      secondary: "#06B6D4",
     },
   },
   typography: typography,
   components: components,
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 744,
-      miniLaptop: 1280,
-      laptop: 1440,
-      desktop: 1728,
-    },
-  },
 } as ThemeOptions);
 
 export default theme;

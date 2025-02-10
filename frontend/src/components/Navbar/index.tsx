@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./styles.scss";
+import { Typography } from "@mui/material";
 
 Navbar.propTypes = {};
 
@@ -9,13 +10,24 @@ function Navbar() {
     <header>
       <ul className="nav">
         <li>
-          <a href="/">Home</a>
+          <Typography variant="h6" sx={{ color: "var(--primary) " }}>
+            <a href="/">Home</a>
+          </Typography>
         </li>
         <li>
-          <a href="/about">About</a>
+          <Typography variant="h6" sx={{ color: "var(--primary) " }}>
+            <a href="/synopsis">Synopsis</a>
+          </Typography>
         </li>
         <li>
-          <a href="/citations">Citations</a>
+          <Typography variant="h6" sx={{ color: "var(--primary) " }}>
+            <a href="/about">About Us</a>
+          </Typography>
+        </li>
+        <li>
+          <Typography variant="h6" sx={{ color: "var(--primary) " }}>
+            <a href="/citations">Citations</a>
+          </Typography>
         </li>
       </ul>
     </header>

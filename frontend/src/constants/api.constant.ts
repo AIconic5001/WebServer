@@ -6,4 +6,4 @@ export const API_CONFIG = {
 };
 
 // Allowed file types matching backend
-export const ALLOWED_TYPES = ["txt", "pdf", "png", "jpg", "jpeg", "gif"];
+export const ALLOWED_TYPES = ["pdf"];

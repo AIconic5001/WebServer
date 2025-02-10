@@ -3,7 +3,7 @@ import LandingPage from "../pages/Landing/LandingPage";
 import AboutPage from "../pages/About";
 import Citations from "../pages/Citations";
 import SynopsisPage from "../pages/Synopsis";
-import Layout from "../layout/Layout";
+import Layout from "../layout/MainLayout/Layout";
 
 export const routes = createBrowserRouter([
   {

@@ -5,7 +5,7 @@ import axios from "axios";
 import { FileTypes } from "../../../@types/FileTypes/file.type";
 import "./styles.scss";
 import Grid from "@mui/material/Grid2";
-import { Typography } from "@mui/material";
+import { Alert, Button, Stack, Typography } from "@mui/material";
 import { useDropzone } from "react-dropzone";
 import { ALLOWED_TYPES, API_CONFIG } from "../../../constants/api.constant";
 import FeatSummaries from "./Components/FeatSummaries";
@@ -38,11 +38,11 @@ function UploadFeature() {
       return false;
     }
 
-    if (file.size > 10 * 1024 * 1024) {
-      // 10MB limit
-      setFileError("File size exceeds 10MB limit");
-      return false;
-    }
+    // if (file.size > 10 * 1024 * 1024) {
+    //   // 10MB limit
+    //   setFileError("File size exceeds 10MB limit");
+    //   return false;
+    // }
 
     setFileError(null);
     return true;
@@ -75,57 +75,86 @@ function UploadFeature() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className="upload-container">
-      <h3>Upload your research paper</h3>
+    <section className="upload-container" id="upload">
+      <Grid container spacing={4}>
+        <Grid size={12} mb={4} fontSize={"80px"}>
+          <Typography variant="h1" align="center" className="title">
+            Upload your research paper
+          </Typography>
+        </Grid>
 
-      <form>
-        <div {...getRootProps()} className="dropzone-container">
-          <input
-            {...getInputProps()}
-            onChange={handleFileSelect}
-            accept={ALLOWED_TYPES.map((t) => `.${t}`).join(",")}
-          />
-          {isDragActive ? (
-            <p>Drop the files here ...</p>
-          ) : (
-            <p>Drag 'n' drop some files here, or click to select files</p>
+        <Grid size={10} m={"auto"}>
+          <div {...getRootProps()} className="dropzone-container">
+            <input
+              {...getInputProps()}
+              onChange={handleFileSelect}
+              accept={ALLOWED_TYPES.map((t) => `.${t}`).join(",")}
+            />
+            {isDragActive ? (
+              <Typography variant="body2" className="secondary-text">
+                Drop the files here ...
+              </Typography>
+            ) : (
+              <Typography
+                variant="body1"
+                sx={{ fontStyle: "italic", fontSize: "1.5rem" }}
+                className="secondary-text"
+              >
+                Drop some files here, or
+                <span style={{ color: "var(--primary-dark)" }}> click</span> to
+                select files
+              </Typography>
+            )}
+          </div>
+        </Grid>
+        <Stack spacing={2} mb={0} sx={{ width: "83%" }} margin={"auto"}>
+          {fileError && (
+            <Alert severity="warning">{`Error: ${
+              fileError || "Invalid file"
+            }`}</Alert>
           )}
+
+          {/* Upload status */}
+          {uploadError && (
+            <Alert severity="error">{`Error: ${
+              uploadError || "Upload failed"
+            }`}</Alert>
+          )}
+
+          {uploadSuccess && (
+            <Alert severity="success">{`File ${
+              selectedFile && selectedFile.name
+            } uploaded successfully!`}</Alert>
+          )}
+
+          {/* File preview */}
+          {selectedFile && <div className="file-preview"></div>}
+        </Stack>
+        {selectedFile && (
+          <Grid container size={12} sx={{ textAlign: "center" }}>
+            <Grid size={6}>
+              <Typography variant="h6">Selected file:</Typography>
+              <Typography variant="body1">{selectedFile.name}</Typography>
+            </Grid>
+            <Grid size={6}>
+              <Button
+                color="secondary"
+                onClick={handleUpload}
+                disabled={!selectedFile || pendingUpload}
+                variant="outlined"
+                sx={{ width: "50%" }}
+              >
+                {pendingUpload ? "Uploading..." : "Upload File"}
+              </Button>
+            </Grid>
+          </Grid>
+        )}
+
+        <div className="feat-summaries-container">
+          <FeatSummaries />
         </div>
-
-        <button
-          onClick={handleUpload}
-          disabled={!selectedFile || pendingUpload}
-          className="upload-button"
-        >
-          {pendingUpload ? "Uploading..." : "Upload File"}
-        </button>
-      </form>
-
-      {fileError && <p className="error-message">{fileError}</p>}
-
-      {/* Upload status */}
-      {uploadError && (
-        <p className="error-message">Error: {uploadError || "Upload failed"}</p>
-      )}
-
-      {uploadSuccess && (
-        <p className="success-message">
-          {`File ${selectedFile && selectedFile.name} uploaded successfully!`}
-        </p>
-      )}
-
-      {/* File preview */}
-      {selectedFile && (
-        <div className="file-preview">
-          <p>Selected File: {selectedFile.name}</p>
-          <p>Size: {(selectedFile.size / 1024).toFixed(2)} KB</p>
-        </div>
-      )}
-
-      <div className="feat-summaries-container">
-        <FeatSummaries />
-      </div>
-    </div>
+      </Grid>
+    </section>
   );
 }
 

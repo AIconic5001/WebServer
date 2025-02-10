@@ -5,8 +5,6 @@ import LoadingSuspense from "./components/LoadingSuspense";
 import { routes } from "./config/routes";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <Suspense fallback={<LoadingSuspense />}>
       <RouterProvider router={routes} />
