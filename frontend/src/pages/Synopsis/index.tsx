@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Stack, Typography } from "@mui/material";
 import DataGrid from "../../components/DataGrid/DataGrid";
@@ -14,6 +14,8 @@ import ButtonGrid from "./ButtonGrid/ButtonGrid";
 import "./styles.scss";
 import ReplyIcon from "@mui/icons-material/Reply";
 import data2 from "../../../src/assets/mock/mockPaperResult.json";
+import { useGetSummaries } from "./handleFilesApi";
+import { useQueryClient } from "@tanstack/react-query";
 
 // Rest of code.
 SynopsisPage.propTypes = {};
@@ -24,14 +26,6 @@ const row: GridDataType = {
   publicationDate: new Date("08/09/1996"),
   relatedtopics: ["CS", "AI", "SWE"],
 };
-const resultsAi: SummariesDataType = {
-  Methodology:
-    "1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex?",
-  Results:
-    "2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex?",
-  Limitations:
-    "3 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex?",
-};
 
 const recommendationAI: RecommendationDataType = {
   "Related Papers": [row, row],
@@ -39,6 +33,22 @@ const recommendationAI: RecommendationDataType = {
 };
 
 function SynopsisPage() {
+  const queryClient = useQueryClient();
+  const [data, setData] = useState<SummariesDataType>({
+    "Conclusion and Implications": "",
+    Methodology: "",
+    Results: "",
+    "Research Problem and Objectives": "",
+  });
+
+  const res = useGetSummaries();
+
+  useEffect(() => {
+    setData(res?.data);
+  }, [res]);
+
+  // const data2 = res.data?.data;
+  // console.log(data);
   return (
     <div className="synopsis-page-container">
       <Stack spacing={6} mt={8}>
@@ -64,9 +74,11 @@ function SynopsisPage() {
         <div className="dataGrid-container">
           <DataGrid row={row} />
         </div>
-        <div className="summaries-container">
-          <SummariesGrid data={data2} />
-        </div>
+        {data && (
+          <div className="summaries-container">
+            <SummariesGrid data={data} />
+          </div>
+        )}
         {/* <PdfDisplay /> */}
         <ButtonGrid />
       </Stack>

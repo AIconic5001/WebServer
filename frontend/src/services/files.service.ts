@@ -13,12 +13,20 @@ const filesService = {
   },
   getAllFiles() {
     const url = "/api/files/files";
-    return axios.get(url);
+    try {
+      return axios.get(url);
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   getFileByName(name: string) {
     const url = `/api/files/${name}`;
-    return axios.get(url);
+    try {
+      return axios.get(url);
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 

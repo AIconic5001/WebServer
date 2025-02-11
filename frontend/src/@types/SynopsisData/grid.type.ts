@@ -6,9 +6,10 @@ export interface GridDataType {
 }
 
 export interface SummariesDataType {
+  "Research Problem and Objectives": string;
   Methodology: string;
   Results: string;
-  Limitations: string;
+  "Conclusion and Implications": string;
 }
 
 export interface RecommendationDataType {

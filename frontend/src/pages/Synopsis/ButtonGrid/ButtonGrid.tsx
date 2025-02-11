@@ -9,18 +9,18 @@ function ButtonGrid() {
   return (
     <div className="button-grid-container">
       <Grid container spacing={2}>
-        <Grid size={6}>
+        <Grid size={4}>
           <Button variant="outlined" color="secondary" fullWidth>
             View Full Synopsis
           </Button>
         </Grid>
-        <Grid size={6}>
+        <Grid size={4}>
           <Button variant="outlined" color="secondary" fullWidth>
             Recommendations
           </Button>
         </Grid>
-        <Grid size={12} textAlign={"center"}>
-          <Button variant="outlined" color="secondary" sx={{ width: "50%" }}>
+        <Grid size={4} textAlign={"center"}>
+          <Button variant="outlined" color="secondary" fullWidth>
             Citation Timeline
           </Button>
         </Grid>
