@@ -6,8 +6,8 @@ export interface GridDataType {
 }
 
 export interface SummariesDataType {
-  "Researching Methods": string;
-  "Key Results": string;
+  Methodology: string;
+  Results: string;
   Limitations: string;
 }
 

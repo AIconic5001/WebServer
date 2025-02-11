@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { CaretDown } from "@phosphor-icons/react";
 const sizeButton = {
@@ -394,21 +395,29 @@ const components = {
       },
     },
   },
-  MuiDataGrid: {
+  MuiTable: {
     styleOverrides: {
       root: {
-        "& .MuiDataGrid-cell:focus": {
-          outline: "none",
-        },
-        "& .MuiDataGrid-cell:focus-within": {
-          outline: "none",
-        },
-        "& .MuiDataGrid-columnHeader:focus": {
-          outline: "none",
-        },
-        "& .MuiDataGrid-row--lastVisible": {
-          borderBottom: "1px solid var(--grey-primary-80) !important",
-        },
+        marginBottom: "0px",
+        marginTop: "0px",
+        boxShadow: "none",
+        // "& .MuiDataGrid-cell:focus": {
+        //   outline: "none",
+        // },
+        // "& .MuiDataGrid-cell:focus-within": {
+        //   outline: "none",
+        // },
+        // "& .MuiDataGrid-columnHeader:focus": {
+        //   outline: "none",
+        // },
+        // "& .MuiDataGrid-row--lastVisible": {
+        //   borderBottom: "1px solid var(--grey-primary-80) !important",
+        // },
+        // "& .MuiTable-root": {
+        //   marginBottom: "0px",
+        // },
+        "& .MuiTableBody:focus": { outline: "none" },
+        "& .MuiTableRow:focus": { outline: "none" },
       },
     },
   },

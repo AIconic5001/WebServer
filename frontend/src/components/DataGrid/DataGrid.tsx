@@ -8,20 +8,28 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import { GridDataType } from "../../@types/SynopsisData/grid.type";
+import "./styles.scss";
+import NameTag from "../NameTag/NameTag";
 
 export default function DataGrid({ row }: { row: GridDataType }) {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }}>
         <TableBody>
           <TableRow
             key={"title"}
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
-            <TableCell component="th" scope="row">
-              <Typography variant="h5">Title</Typography>
+            <TableCell component="th" scope="row" width={"25%"}>
+              <Typography variant="h5" className="text-color">
+                Title
+              </Typography>
             </TableCell>
-            <TableCell align="right">{row.title}</TableCell>
+            <TableCell align="left">
+              <Typography variant="body1" color="black">
+                {row.title}
+              </Typography>
+            </TableCell>
           </TableRow>
 
           <TableRow
@@ -29,11 +37,14 @@ export default function DataGrid({ row }: { row: GridDataType }) {
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
             <TableCell component="th" scope="row">
-              <Typography variant="h5">Authors</Typography>
+              <Typography variant="h5" className="text-color">
+                Authors
+              </Typography>
             </TableCell>
-            <TableCell align="right">
+            <TableCell align="left">
               {row.authors.map((author) => (
-                <Typography key={author}>{author}</Typography>
+                // <Typography key={author}>{author}</Typography>
+                <NameTag key={author} data={author} defaultColor="black" />
               ))}
             </TableCell>
           </TableRow>
@@ -42,19 +53,28 @@ export default function DataGrid({ row }: { row: GridDataType }) {
             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
           >
             <TableCell component="th" scope="row">
-              <Typography variant="h5">Publication Date</Typography>
+              <Typography variant="h5" className="text-color">
+                Publication Date
+              </Typography>
             </TableCell>
-            <TableCell align="right">
-              {row.publicationDate.toLocaleDateString()}
+            <TableCell align="left">
+              <Typography variant="body1" color="black">
+                {row.publicationDate.toLocaleDateString()}
+              </Typography>
             </TableCell>
           </TableRow>
           <TableRow key={"relatedtopics"}>
             <TableCell component="th" scope="row">
-              <Typography variant="h5">Related Topics</Typography>
+              <Typography variant="h5" className="text-color">
+                Related Topics
+              </Typography>
             </TableCell>
-            <TableCell align="right">
+            <TableCell
+              align="left"
+              sx={{ display: "flex", flexDirection: "row" }}
+            >
               {row.relatedtopics.map((topic) => (
-                <Typography key={topic}>{topic}</Typography>
+                <NameTag key={topic} data={topic} defaultColor="" />
               ))}
             </TableCell>
           </TableRow>

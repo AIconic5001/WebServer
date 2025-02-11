@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Stack, Typography } from "@mui/material";
 import DataGrid from "../../components/DataGrid/DataGrid";
@@ -11,6 +11,9 @@ import Grid from "@mui/material/Grid2";
 import SummariesGrid from "./SummariesGrid/SummariesGrid";
 import PdfDisplay from "./PdfDisplay/PdfDisplay";
 import ButtonGrid from "./ButtonGrid/ButtonGrid";
+import "./styles.scss";
+import ReplyIcon from "@mui/icons-material/Reply";
+import data2 from "../../../src/assets/mock/mockPaperResult.json";
 
 // Rest of code.
 SynopsisPage.propTypes = {};
@@ -22,9 +25,9 @@ const row: GridDataType = {
   relatedtopics: ["CS", "AI", "SWE"],
 };
 const resultsAi: SummariesDataType = {
-  "Researching Methods":
+  Methodology:
     "1 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex?",
-  "Key Results":
+  Results:
     "2 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex?",
   Limitations:
     "3 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, mollitia sequi autem nesciunt explicabo corrupti, debitis expedita incidunt officiis quod labore consequuntur iure fugit libero adipisci voluptates nulla, nemo ex?",
@@ -38,9 +41,32 @@ const recommendationAI: RecommendationDataType = {
 function SynopsisPage() {
   return (
     <div className="synopsis-page-container">
-      <Stack spacing={2} mt={8}>
-        <DataGrid row={row} />
-        <SummariesGrid data={resultsAi} />
+      <Stack spacing={6} mt={8}>
+        <div className="title-container">
+          <Grid container spacing={2}>
+            <Grid size={2}>
+              <a href="/">
+                <Button
+                  variant="outlined"
+                  startIcon={<ReplyIcon sx={{ color: "var(--primary-dark" }} />}
+                >
+                  Back
+                </Button>
+              </a>
+            </Grid>
+            {/* <Grid size={10}>
+              <Typography variant="h3" sx={{ color: "var(--primary)" }}>
+                Synopsis
+              </Typography>
+            </Grid> */}
+          </Grid>
+        </div>
+        <div className="dataGrid-container">
+          <DataGrid row={row} />
+        </div>
+        <div className="summaries-container">
+          <SummariesGrid data={data2} />
+        </div>
         {/* <PdfDisplay /> */}
         <ButtonGrid />
       </Stack>

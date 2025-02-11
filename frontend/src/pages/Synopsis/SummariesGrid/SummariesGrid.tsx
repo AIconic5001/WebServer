@@ -11,20 +11,27 @@ function SummariesGrid({ data }: { data: SummariesDataType }) {
   const keys = Object.keys(data) as Array<keyof typeof data>;
   return (
     <div>
-      <Stack spacing={2} direction={{ xs: "column", md: "row" }}>
+      <Grid spacing={0} container>
         {keys.map((key) => (
-          <Grid container key={key} size={4}>
-            <Grid size={12}>
-              <Typography variant="h6" align="center">
-                {key}
-              </Typography>
-            </Grid>
-            <Grid size={12} pt={2} borderTop={1}>
-              <Typography variant="h6">{data[key]}</Typography>
-            </Grid>
+          <Grid size={4} height={"40px"}>
+            <Typography variant="h6" align="center">
+              {key}
+            </Typography>
           </Grid>
         ))}
-      </Stack>
+        <Grid container spacing={4}>
+          {" "}
+          {keys.map((key) => (
+            <Grid container key={key} size={4}>
+              <Grid size={12} pt={2} borderTop={1}>
+                <Typography variant="body1" align="justify">
+                  {data[key]}
+                </Typography>
+              </Grid>
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
     </div>
   );
 }
