@@ -24,13 +24,8 @@ const row: GridDataType = {
   relatedtopics: ["CS", "AI", "SWE"],
 };
 
-const recommendationAI: RecommendationDataType = {
-  "Related Papers": [row, row],
-  "Potential Fields": ["CS", "AI", "SWE"],
-};
-
 function SynopsisPage() {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const [data, setData] = useState<SummariesDataType>({
     "Conclusion and Implications": "",
     Methodology: "",

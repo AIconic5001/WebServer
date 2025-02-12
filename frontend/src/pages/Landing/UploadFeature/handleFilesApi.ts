@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import filesService from "../../services/files.service";
-import { API_CONFIG } from "../../constants/api.constant";
+import filesService from "../../../services/files.service";
+import { API_CONFIG } from "../../../constants/api.constant";
 
 export const useGetFileByName = (name: string) => {
   return useQuery({

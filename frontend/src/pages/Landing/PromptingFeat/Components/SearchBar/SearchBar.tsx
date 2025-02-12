@@ -1,11 +1,9 @@
-import * as React from "react";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
+import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import ArrowCircleRightOutlinedIcon from "@mui/icons-material/ArrowCircleRightOutlined";
+import InputBase from "@mui/material/InputBase";
+import Paper from "@mui/material/Paper";
 
 export default function SearchBar() {
   return (

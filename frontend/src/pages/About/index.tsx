@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Img from "../../assets/images/demoPic.png";

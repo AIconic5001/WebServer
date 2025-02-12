@@ -1,6 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import synopsisService from "../../services/synopsis.service";
-import { API_CONFIG } from "../../constants/api.constant";
 
 export const useGetSummaries = () => {
   const { data } = useQuery({
