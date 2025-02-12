@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { CaretDown } from "@phosphor-icons/react";
 const sizeButton = {

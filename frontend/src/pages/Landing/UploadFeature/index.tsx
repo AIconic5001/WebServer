@@ -1,6 +1,5 @@
 import { Alert, Button, Stack, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FileTypes } from "../../../@types/FileTypes/file.type";

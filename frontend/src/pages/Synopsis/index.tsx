@@ -1,11 +1,9 @@
 import ReplyIcon from "@mui/icons-material/Reply";
 import { Button, Stack } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import {
   GridDataType,
-  RecommendationDataType,
   SummariesDataType,
 } from "../../@types/SynopsisData/grid.type";
 import DataGrid from "../../components/DataGrid/DataGrid";
