@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FileTypes } from "../../../@types/FileTypes/file.type";
 import { ALLOWED_TYPES } from "../../../constants/api.constant";
-import { useUploadFile } from "./handleFilesApi";
+import { useUploadFile } from "../handleFilesApi";
 import FeatSummaries from "./Components/FeatSummaries";
 import "./styles.scss";
 
