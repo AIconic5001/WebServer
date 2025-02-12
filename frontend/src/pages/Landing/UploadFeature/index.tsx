@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { FileTypes } from "../../../@types/FileTypes/file.type";
-import "./styles.scss";
-import Grid from "@mui/material/Grid2";
 import { Alert, Button, Stack, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { useQueryClient } from "@tanstack/react-query";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { ALLOWED_TYPES, API_CONFIG } from "../../../constants/api.constant";
+import { FileTypes } from "../../../@types/FileTypes/file.type";
+import { ALLOWED_TYPES } from "../../../constants/api.constant";
+import { useUploadFile } from "../handleFilesApi";
 import FeatSummaries from "./Components/FeatSummaries";
-import { useGetAllFiles, useUploadFile } from "../handleFilesApi";
+import "./styles.scss";
 
 UploadFeature.propTypes = {};
 

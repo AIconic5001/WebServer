@@ -1,9 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Stack } from "@mui/material";
-import { SummariesDataType } from "../../../@types/SynopsisData/grid.type";
 import Grid from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
+import { SummariesDataType } from "../../../@types/SynopsisData/grid.type";
 
 SummariesGrid.propTypes = {};
 

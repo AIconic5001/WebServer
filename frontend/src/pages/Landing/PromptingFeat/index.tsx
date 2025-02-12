@@ -1,10 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./styles.scss";
+import { Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { Button, Typography } from "@mui/material";
-import TopicBox from "./TopicBox";
 import SearchBox from "./SearchBox";
+import "./styles.scss";
+import TopicBox from "./TopicBox";
 
 PromptingFeat.propTypes = {};
 

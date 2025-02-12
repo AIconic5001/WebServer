@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { Button, Stack, Typography } from "@mui/material";
-import DataGrid from "../../components/DataGrid/DataGrid";
+import ReplyIcon from "@mui/icons-material/Reply";
+import { Button, Stack } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import {
   GridDataType,
   RecommendationDataType,
   SummariesDataType,
 } from "../../@types/SynopsisData/grid.type";
-import Grid from "@mui/material/Grid2";
-import SummariesGrid from "./SummariesGrid/SummariesGrid";
-import PdfDisplay from "./PdfDisplay/PdfDisplay";
+import DataGrid from "../../components/DataGrid/DataGrid";
 import ButtonGrid from "./ButtonGrid/ButtonGrid";
-import "./styles.scss";
-import ReplyIcon from "@mui/icons-material/Reply";
-import data2 from "../../../src/assets/mock/mockPaperResult.json";
 import { useGetSummaries } from "./handleFilesApi";
-import { useQueryClient } from "@tanstack/react-query";
+import "./styles.scss";
+import SummariesGrid from "./SummariesGrid/SummariesGrid";
 
 // Rest of code.
 SynopsisPage.propTypes = {};

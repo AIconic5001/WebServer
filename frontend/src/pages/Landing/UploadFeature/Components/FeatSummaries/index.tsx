@@ -1,8 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid2";
-import { Typography } from "@mui/material";
 import CheckBoxTwoToneIcon from "@mui/icons-material/CheckBoxTwoTone";
+import { Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 FeatSummaries.propTypes = {};
 
 function FeatSummaries() {
